@@ -1,4 +1,4 @@
-package fr.mbds.grails.projet
+package fr.mbds.grails.project
 
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification

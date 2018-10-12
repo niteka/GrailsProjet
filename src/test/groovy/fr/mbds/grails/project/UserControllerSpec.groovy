@@ -1,4 +1,5 @@
-package fr.mbds.grails.projet
+package fr.mbds.grails.project
+
 
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification

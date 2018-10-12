@@ -1,73 +1,73 @@
-package fr.mbds.grails.projet
+package fr.mbds.grails.project
 
-import fr.mbds.grails.project.User
+
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-class UserController {
+class MatchController {
 
-    UserService userService
+    MatchService matchService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond userService.list(params), model:[userCount: userService.count()]
+        respond matchService.list(params), model:[matchCount: matchService.count()]
     }
 
     def show(Long id) {
-        respond userService.get(id)
+        respond matchService.get(id)
     }
 
     def create() {
-        respond new User(params)
+        respond new Match(params)
     }
 
-    def save(User user) {
-        if (user == null) {
+    def save(Match match) {
+        if (match == null) {
             notFound()
             return
         }
 
         try {
-            userService.save(user)
+            matchService.save(match)
         } catch (ValidationException e) {
-            respond user.errors, view:'create'
+            respond match.errors, view:'create'
             return
         }
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                flash.message = message(code: 'default.created.message', args: [message(code: 'match.label', default: 'Match'), match.id])
+                redirect match
             }
-            '*' { respond user, [status: CREATED] }
+            '*' { respond match, [status: CREATED] }
         }
     }
 
     def edit(Long id) {
-        respond userService.get(id)
+        respond matchService.get(id)
     }
 
-    def update(User user) {
-        if (user == null) {
+    def update(Match match) {
+        if (match == null) {
             notFound()
             return
         }
 
         try {
-            userService.save(user)
+            matchService.save(match)
         } catch (ValidationException e) {
-            respond user.errors, view:'edit'
+            respond match.errors, view:'edit'
             return
         }
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'match.label', default: 'Match'), match.id])
+                redirect match
             }
-            '*'{ respond user, [status: OK] }
+            '*'{ respond match, [status: OK] }
         }
     }
 
@@ -77,11 +77,11 @@ class UserController {
             return
         }
 
-        userService.delete(id)
+        matchService.delete(id)
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'match.label', default: 'Match'), id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -91,7 +91,7 @@ class UserController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'match.label', default: 'Match'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

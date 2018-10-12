@@ -1,6 +1,6 @@
 package fr.mbds.grails
 
-import fr.mbds.grails.projet.UserController
+import fr.mbds.grails.project.UserController
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 

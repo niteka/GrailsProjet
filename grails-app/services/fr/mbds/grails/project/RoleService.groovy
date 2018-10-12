@@ -1,6 +1,6 @@
-package fr.mbds.grails.projet
+package fr.mbds.grails.project
 
-import fr.mbds.grails.project.Role
+
 import grails.gorm.services.Service
 
 @Service(Role)
